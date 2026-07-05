@@ -1,0 +1,215 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>Login</title>
+    <style>
+        body {
+            background-color: #313131;
+            background-image: linear-gradient(to bottom, #3a3a3a 0%, #1c1c1c 100%);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+            font-family: Arial, Helvetica, sans-serif;
+            position: relative;
+            overflow: hidden;
+        }
+        body::before {
+            content: "";
+            position: absolute;
+            width: 100%;
+            height: 165px;
+            background: linear-gradient(to bottom, #2a2a2a 0%, #202020 100%);
+            border-top: 1px solid #444;
+            border-bottom: 1px solid #151515;
+            z-index: 1;
+        }
+
+        .login-box {
+            width: 490px;
+            height: 275px;
+            background: linear-gradient(to bottom, #d2d2d2 0%, #a0a0a0 100%);
+            border-radius: 6px;
+            border: 1px solid #4f4f4f;
+            box-shadow: 0 30px 70px rgba(0,0,0,0.85), inset 0 1px 0 #ffffff;
+            z-index: 2;
+            overflow: hidden;
+            display: flex;
+            flex-direction: column;
+            -webkit-box-reflect: below 1px linear-gradient(transparent 65%, rgba(255, 255, 255, 0.12));
+        }
+
+        .box-header {
+            height: 75px;
+            background: linear-gradient(to bottom, #e2e2e2 0%, #dedede 15%, #424242 16%, #252525 100%);
+            border-bottom: 2px solid #1a1a1a;
+            box-shadow: inset 0 1px 0 #fff;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 0 0 0 20px;
+            position: relative;
+        }
+
+        .brand-logo {
+            height: 44px;
+            width: auto;
+            display: block;
+            margin-top: 8px;
+            filter: drop-shadow(0px 1px 1px rgba(0,0,0,0.6));
+        }
+
+        .camera-lens {
+            width: 124px;
+            height: 64px;
+            background-image: url("dahua_lens.png");
+            background-size: cover;
+            background-position: center;
+            position: absolute;
+            right: 0;
+            bottom: 0;
+            border-top-right-radius: 0px;
+        }
+
+        .box-body {
+            flex: 1;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding: 20px;
+            padding-top: 25px;
+        }
+
+        #loginForm {
+            display: flex;
+            flex-direction: column;
+            gap: 13px;
+            align-items: center;
+        }
+
+        .form-group {
+            display: flex;
+            align-items: center;
+        }
+
+        .form-group label {
+            font-size: 13px;
+            color: #333333;
+            width: 80px;
+            text-align: right;
+            margin-right: 12px;
+            text-shadow: 0 1px 0 rgba(255,255,255,0.5);
+        }
+
+        .form-group input {
+            width: 195px;
+            height: 20px;
+            border: 1px solid #737373;
+            border-top-color: #444444;
+            background-color: #ffffff;
+            padding: 0 5px;
+            font-size: 13px;
+            border-radius: 1px;
+            box-shadow: inset 0 1px 2px rgba(0,0,0,0.2);
+        }
+        .form-group input:focus {
+            outline: none;
+            border: 1px solid #3b82f6;
+            box-shadow: 0 0 3px rgba(59, 130, 246, 0.6);
+        }
+
+        .btn-group {
+            display: flex;
+            gap: 10px;
+            margin-top: 6px;
+            padding-left: 92px;
+        }
+
+        .btn {
+            background: linear-gradient(to bottom, #ffffff 0%, #e2e2e2 40%, #bcbcbc 100%);
+            border: 1px solid #555555;
+            border-radius: 2px;
+            color: #222222;
+            font-size: 12px;
+            width: 92px;
+            height: 24px;
+            cursor: pointer;
+            box-shadow: 0 1px 1px rgba(0,0,0,0.15), inset 0 1px 0 #fff;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+        .btn:hover {
+            background: linear-gradient(to bottom, #f7f7f7 0%, #cbcbcb 100%);
+        }
+        .btn:active {
+            background: #bcbcbc;
+            box-shadow: inset 0 1px 3px rgba(0,0,0,0.3);
+        }
+    </style>
+</head>
+<body>
+
+    <div class="login-box">
+        <div class="box-header">
+            <img class="brand-logo" src="./static/dahua-logo.png" alt="Dahua Logo">
+            
+            <div class="camera-lens"></div>
+        </div>
+
+    <div class="box-body">
+        <form id="loginForm">
+            <div class="form-group">
+                <label>Username:</label>
+                <input type="text" name="username" id="username" required>
+            </div>
+            <div class="form-group">
+                <label>Password:</label>
+                <input type="password" name="password" id="password" required>
+            </div>
+            
+            <div id="error-msg" style="color: #ff3333; font-size: 12px; margin-top: 5px; display: none; padding-left: 92px; width: 100%; text-align: left;">
+                Invalid username or password.
+            </div>
+            
+            <div class="btn-group">
+                <button type="submit" class="btn">Login</button>
+                <button type="button" class="btn" onclick="clearForm()">Cancel</button>
+            </div>
+        </form>
+    </div>
+
+    <script>
+    document.getElementById('loginForm').addEventListener('submit', function(e) {
+        e.preventDefault();
+        
+        const formData = new FormData(this);
+
+        fetch('/Login.html', {
+            method: 'POST',
+            body: formData
+        })
+        .then(response => {
+            if (!response.ok) {
+                const errorDiv = document.getElementById('error-msg');
+                errorDiv.style.display = 'block';
+                document.getElementById('password').value = '';
+            }
+        })
+        .catch(err => {
+            console.error('Network error:', err);
+        });
+    });
+
+    function clearForm() {
+        document.getElementById('loginForm').reset();
+        document.getElementById('error-msg').style.display = 'none';
+    }
+    </script>
+
+    </div>
+
+</body>
+</html>
