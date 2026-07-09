@@ -15,12 +15,15 @@ The system is built on a modular design, ensuring that data collection and analy
 ## 📂 Project Structure
 ```text
 IoT_Honeypot/
+├── static/
+│   └── dahua-logo.png
 ├── .env                  # Environment variables (API Keys)
 ├── launcher.py           # Unified service orchestrator
 ├── honeypot_server.py    # Web server trap for IoT requests
 ├── enrich.py             # Threat intelligence & analysis engine
 ├── dashboard.py          # Visualization dashboard
 ├── iot_honeypot.log      # Raw traffic capture
+├── Login.html 
 └── enriched_threats.json # Processed intelligence data
 ```
 
