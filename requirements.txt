@@ -1,0 +1,8 @@
+flask
+streamlit
+requests
+pandas
+numpy
+python-dotenv
+streamlit_folium
+folium
