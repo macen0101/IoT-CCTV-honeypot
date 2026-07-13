@@ -30,7 +30,7 @@ IoT_Honeypot/
 ## 🛠️ Technical Stack
 | Component | Technology |
 |---|---|
-| Backend Language | Python 3.x |
+| Backend Language | Python 3.13 |
 | Concurrency | threading, queue, subprocess |
 | Data Processing | pandas, json |
 | Visualization | streamlit, folium |
