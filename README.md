@@ -1,4 +1,4 @@
-# Dahua IoT Honeypot & Threat Intelligence Suite
+# IoT CCTV Honeypot & Threat Intelligence Suite
 
 A professional, modular honeypot system designed to capture, analyze, and categorize cyberattacks targeting IoT devices.
 
